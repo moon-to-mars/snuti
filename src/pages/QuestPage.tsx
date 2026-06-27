@@ -10,10 +10,10 @@ const TRACK_LABEL: Record<QuestTrack, string> = {
 }
 
 const TRACK_COLOR: Record<QuestTrack, string> = {
-  focus: 'bg-[#ffc83d] text-[#715400]',
-  emotion: 'bg-[#e4e2e2] text-[#4f4634]',
-  behavior: 'bg-[#e4e2e2] text-[#4f4634]',
-  parent_support: 'bg-[#e4e2e2] text-[#4f4634]',
+  focus:          'bg-[#ffc83d] text-[#715400]',
+  emotion:        'bg-[#ffc83d] text-[#715400]',
+  behavior:       'bg-[#ffc83d] text-[#715400]',
+  parent_support: 'bg-[#ffc83d] text-[#715400]',
 }
 
 interface QuestDetailProps {
