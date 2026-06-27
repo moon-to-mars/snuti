@@ -6,14 +6,16 @@ const child = mockChildren[0]
 const quests = mockQuests.filter((q) => q.childId === child.id).slice(0, 3)
 
 const TRACK_EMOJI = {
-  focus: '🧠',
-  behavior: '⭐',
+  focus:          '🧠',
+  emotion:        '💛',
+  behavior:       '⭐',
   parent_support: '🤝',
 } as const
 
 const TRACK_BG = {
-  focus: 'bg-[#e8f0ff] border-[#c5d8f7]',
-  behavior: 'bg-[#fff3d7] border-[#fae7b4]',
+  focus:          'bg-[#e8f0ff] border-[#c5d8f7]',
+  emotion:        'bg-[#fff3d7] border-[#fae7b4]',
+  behavior:       'bg-[#fff3d7] border-[#fae7b4]',
   parent_support: 'bg-[#fff0ea] border-[#fcc9a9]',
 } as const
 
