@@ -1,20 +1,20 @@
 # DESIGN.md
 
-PTBM Quest 웹앱(UI 프로토타입)의 디자인 시스템 가이드.
-"Organic Storybook" — 따뜻하고 손그림 같은, 종이 질감의 부드러운 분위기.
+Kids in Flow 웹앱(UI 프로토타입)의 디자인 시스템 가이드.
+"Luminous Flow" — 낙관적이지만 차분한, 노란색을 액션의 신호로 쓰는 모던 미니멀.
 구현 시 이 토큰을 기준으로 한다. (외부 연결 없이 화면만 구현)
 
 ## 브랜드 & 톤
 
-- 임상적 정밀함 대신 **그림책처럼 따뜻하고 다정한** 경험.
-- 손그림 일러스트, 말풍선, 유기적(둥글고 살짝 불규칙한) 형태가 핵심.
-- 차갑지 않은 종이 질감 — 매트하고 부드러운 카드스톡 느낌.
-- 여백을 넉넉히, 정보를 빽빽하게 채우지 않는다.
+- "Kids in Flow"의 발랄함을 부모·교육자를 위한 **정제된 전문성**으로 옮긴 시스템.
+- 원색 난잡함을 버리고 **모던 미니멀 + 촉각적 포인트**. 낙관적이되 신뢰감 있게.
+- 넓은 여백과 절제된 색 사용으로 "공기감"과 "신뢰"를 연출.
+- 보조 시각 노이즈를 걷어내고 **노랑을 액션·진행의 등대**로 강조.
 
 ### 디자인 원칙
-- **유기적 > 기하학적**: 완벽한 원·직각 대신 살짝 불규칙한 모서리와 곡선.
-- **사람다움**: 손그림 일러스트와 말풍선으로 이야기처럼 전달.
-- **촉각적 편안함**: 표면은 종이처럼 부드럽고 매트하게.
+- **여백 우선**: 정보를 빽빽이 채우지 않고 "정보의 섬"을 만든다.
+- **절제된 색**: 노랑은 액션 전용. 빨강/파랑은 의미(경고/정보)로만 소량 사용.
+- **가벼운 깊이**: 무거운 그림자 대신 톤 레이어링과 아주 옅은 그림자.
 
 ## 색상 토큰
 
@@ -23,113 +23,116 @@ Tailwind를 쓴다면 아래 값을 `theme.extend.colors`에 등록한다.
 ### 표면 / 배경
 | 토큰 | 값 | 용도 |
 |------|------|------|
-| surface / background | `#fff8f0` | 기본 캔버스(따뜻한 종이색) |
-| surface-dim | `#ebd9a7` | 가라앉은 표면 |
-| surface-container-lowest | `#ffffff` | 가장 밝은 카드 |
-| surface-container-low | `#fff3d7` | 카드 |
-| surface-container | `#ffedbc` | 강조 카드(주간 진행도 등) |
-| surface-container-high | `#fae7b4` | |
-| surface-container-highest | `#f4e1af` | |
-| surface-variant | `#f4e1af` | 보조 표면 |
+| surface / background | `#fbf9f8` | 기본 배경(따뜻한 오프화이트) |
+| surface-dim | `#dbdad9` | 가라앉은 표면 |
+| surface-container-lowest | `#ffffff` | 카드(순백) |
+| surface-container-low | `#f5f3f3` | 옅은 컨테이너 |
+| surface-container | `#efeded` | |
+| surface-container-high | `#e9e8e7` | |
+| surface-container-highest | `#e4e2e2` | |
+| surface-variant | `#e4e2e2` | 보조 표면 |
 
 ### 텍스트
 | 토큰 | 값 | 용도 |
 |------|------|------|
-| on-surface | `#231b00` | 본문·제목(근접 블랙) |
-| on-surface-variant | `#414754` | 보조 텍스트 |
-| outline | `#727785` | 테두리·구분선 |
-| outline-variant | `#c1c6d6` | 옅은 테두리 |
+| on-surface | `#1b1c1c` | 본문·제목(근접 블랙) |
+| on-surface-variant | `#4f4634` | 보조 텍스트 |
+| outline | `#817661` | 테두리 |
+| outline-variant | `#d2c5ad` | 옅은 테두리 |
 
 ### 액션 / 강조
 | 토큰 | 값 | 용도 |
 |------|------|------|
-| primary | `#005bbf` | 주요 액션(버튼·강조 텍스트) |
-| primary-container | `#1a73e8` | 활기찬 블루(버튼 배경·캐릭터 포인트) |
-| on-primary | `#ffffff` | primary 위 텍스트 |
-| secondary | `#954921` | 보조 |
-| secondary-container | `#fc9b6c` | 코랄·말풍선(따뜻한 보조 메시지) |
-| tertiary | `#735c00` | |
-| tertiary-container | `#d0a700` | 노랑 강조·하이라이트·알림 |
-| error | `#ba1a1a` | 멜트다운 '심함' 등 경고 |
+| primary | `#785a00` | 노랑 위 텍스트, 진한 강조 |
+| primary-container | `#ffc83d` | **핵심 노랑** — 버튼·진행바·활성 상태 |
+| on-primary-container | `#715400` | 노랑 버튼 위 텍스트(딥 옐로/브라운) |
+| inverse-primary | `#f5bf34` | |
+| secondary | `#5f5e5e` | 중립 보조 |
+| secondary-container | `#e2dfde` | 보조 칩·표면 |
+| tertiary-container | `#d0d0cb` | |
+| error | `#ba1a1a` | 경고 |
 | error-container | `#ffdad6` | 경고 배경 |
+| inverse-surface | `#303031` | 어두운 버튼 배경("Resume Journey" 등) |
+| inverse-on-surface | `#f2f0f0` | 어두운 버튼 위 텍스트 |
 
-### 핵심 4색 요약
-- **Primary Blue `#1A73E8`**: 핵심 액션·캐릭터 포인트.
-- **Secondary Orange `#FF9D6E`**: 보조 강조·말풍선.
-- **Tertiary Yellow `#FFCD00`**: 하이라이트·알림·콜아웃.
-- **Neutral `#F9E6B3`**: 따뜻한 배경(순백 대비 눈 피로 감소).
-
-> 텍스트는 항상 짙은 네이비/근접 블랙으로 가독성 확보.
+### 핵심 색 요약
+- **Primary Yellow `#FFC83D`**: 시스템의 영혼. 주요 버튼·진행 지표·활성 상태에만.
+- **Near-black `#1A1A1A`**: 텍스트·구조 요소. 최대 가독성과 프리미엄감.
+- **오프화이트 `#FBF9F8`**: 순백보다 덜 임상적인 따뜻한 배경.
+- **빨강/파랑**: 오직 의미(오류·정보)로만, 저채도·작게. 노랑과 경쟁 금지.
 
 ## 타이포그래피
 
-폰트는 **Quicksand** 단독 사용(둥근 느낌 유지). `index.html`에 Google Fonts 로드.
+헤드라인은 **Hanken Grotesk**, 본문·UI는 **Inter**. `index.html`에서 Google Fonts 로드.
 
 | 토큰 | 폰트 | 크기 | 굵기 | 행간 | 자간 |
 |------|------|------|------|------|------|
-| headline-lg | Quicksand | 40px | 700 | 48px | -0.02em |
-| headline-lg-mobile | Quicksand | 32px | 700 | 38px | |
-| headline-md | Quicksand | 28px | 600 | 34px | |
-| body-lg | Quicksand | 18px | 500 | 28px | |
-| body-md | Quicksand | 16px | 400 | 24px | |
-| label-bold | Quicksand | 14px | 700 | 20px | |
+| headline-lg | Hanken Grotesk | 48px | 800 | 56px | -0.02em |
+| headline-md | Hanken Grotesk | 32px | 700 | 40px | -0.01em |
+| headline-sm | Hanken Grotesk | 24px | 700 | 32px | |
+| headline-lg-mobile | Hanken Grotesk | 32px | 800 | 40px | |
+| body-lg | Inter | 18px | 400 | 28px | |
+| body-md | Inter | 16px | 400 | 24px | |
+| label-bold | Inter | 14px | 600 | 20px | |
+| label-sm | Inter | 12px | 500 | 16px | |
 
-- 제목: 700/600, 살짝 좁은 자간으로 친근하고 임팩트 있게.
-- 본문: 500 기본(컬러 배경 가독성). 400은 밀도 높은 안내문에만.
-- 제목↔본문 크기 대비를 크게 두어 위계 확보.
+- **극단적 위계**: 헤드라인은 크고 좁은 자간으로 "포스터" 느낌, 본문은 차분하게.
+- 본문 18px 선호 → 공기감 유지, 인지 부하 감소.
+- 라벨(섹션 헤더 "ACTIVITY CONTEXT" 등)은 **대문자 + 넓은 자간**으로 본문과 구분.
 
 ## 레이아웃 & 간격
 
-- 8px 기준 단위. 수직 스택은 큰 증분(32px, 56px) 선호 → 공기감 유지.
-- 모바일 마진 20px, 데스크톱 64px+. 콘텐츠를 책 본문처럼 가운데 모음.
-- 데스크톱 12컬럼 / 모바일 4컬럼 그리드.
-- 가끔 카드를 오프셋하거나 손그림 요소로 그리드를 깨 놀이성 부여.
+- 모든 간격은 **8px 배수**. 요소는 가깝게(8/16px) 묶고, 묶음끼리는 넓게(32/48px+) 띄워 "섬"을 만든다.
+- 데스크톱 12컬럼 / 64px 마진 / 섹션 간 80px+. 모바일 4컬럼 / 16px 마진.
+- 컨테이너 최대폭 1280px.
 
 ```
-spacing: { unit: 8px, gutter: 24px, margin-mobile: 20px, margin-desktop: 64px,
-           stack-sm: 12px, stack-md: 32px, stack-lg: 56px }
+spacing: { unit: 8px, container-max: 1280px, gutter: 24px,
+           margin-mobile: 16px, margin-desktop: 64px, section-gap: 80px }
 ```
 
 > 프로토타입은 모바일 폭(약 390px) 단일 화면 기준으로 먼저 구현한다(목업이 전부 모바일).
 
 ## 모서리 둥글기
 
-| 토큰 | 값 |
-|------|------|
-| sm | 0.25rem |
-| DEFAULT | 0.5rem |
-| md | 0.75rem |
-| lg | 1rem |
-| xl | 1.5rem |
-| full | 9999px |
+| 토큰 | 값 | 용도 |
+|------|------|------|
+| sm | 0.25rem | |
+| DEFAULT | 0.5rem | 기본 |
+| md | 0.75rem | |
+| lg | 1rem | 버튼·입력 |
+| xl | 1.5rem | 카드·큰 컨테이너 |
+| full | 9999px | 아바타·상태 점·칩 |
 
-- **유기적 모서리**: 한 컨테이너의 네 모서리 radius를 살짝 다르게(예: 24/18/32/20px) → 손으로 자른 느낌.
-- 말풍선: 둥근 꼬리 + 부드러운 꼭짓점.
-- 배경 장식은 매끄러운 블롭(blob) 형태.
+- 큰 카드/컨테이너는 `xl`, 버튼·입력은 `lg`.
+- 원형은 아바타와 상태 점에 사용해 로고의 원형 모티프와 연결.
 
 ## 깊이 & 입체
 
-전통적 그림자/블러 대신 **물리적 레이어링**으로 깊이 표현.
+무거운 그림자 대신 **톤 레이어링 + 옅은 깊이**.
 
-- 카드 뒤에 4~8px 오프셋된, 약간 더 어둡고 따뜻한 보조 면을 깔아 두께감.
-- 일러스트가 카드 경계를 살짝 "넘어서" 겹치게.
-- 테두리는 검은 그림자 대신 surface보다 약간 짙은 색의 2px 부드러운 선.
-- 표면에 아주 미세한 종이 그레인/노이즈 오버레이(선택).
+- 대부분 콘텐츠는 오프화이트 배경 위. 카드는 살짝 밝은 화이트 또는 1px 옅은 테두리(`#e6e6e6`).
+- 입체가 필요할 때(모달·주요 버튼)만 **부드러운 단일 앰비언트 그림자**: `0px 10px 30px rgba(0,0,0,0.04)`.
+- 호버 시 살짝 위로 뜨고(-Y) 그림자 spread 약간 증가 → 촉각 피드백.
 
 ## 컴포넌트
 
-- **버튼**: 큼직한 알약형. Primary Blue 또는 Tertiary Yellow. 4px "바텀 헤비" 보더나 오프셋 배경 레이어로 눌리는 촉감(그라데이션 금지).
-- **칩**: 작은 유기적 형태, 1px 손그림 테두리. 카테고리·태그용. (예: HIGH/MID 수행도 태그)
-- **카드**: 부드러운 표면(`#fff8f0`/`#ffffff`), 32px 넉넉한 패딩, 크고 살짝 불규칙한 모서리.
-- **입력 필드**: 2px 부드러운 컬러 테두리 + 미세 그레인. 포커스 시 테두리를 Primary Blue로 교체. (관찰 일지 textarea)
-- **리스트**: 회색 직선 대신 여백과 "물결" 구분선으로 분리. (임상 관찰 기록 표)
-- **말풍선**: 손그림 꼬리. Secondary Orange 또는 Cyan-Blue로 본문 배경과 대비. 온보딩·피드백·AI 멘트에 사용.
+- **버튼(주)**: 솔리드 노랑 + 검정 텍스트, `rounded-lg`. (예: "Save Observation", "Start Quest")
+- **버튼(보조)**: 고스트형, 검정 테두리. (예: "Cancel", "Export PDF")
+- **버튼(강조 다크)**: 검정 배경 + 흰 텍스트. 노랑 카드 위 주요 동선에 사용. (예: "Resume Journey")
+- **입력**: 오프화이트 배경 + 1px 옅은 테두리. 포커스 시 테두리는 **검정**으로(노랑은 액션 전용이라 사용 안 함).
+- **카드**: 테두리 없이 아주 옅은 앰비언트 그림자, `rounded-xl`.
+- **진행바**: fill은 노랑, track은 배경의 뮤트 버전. (포커스 스코어, 미션 진행률)
+- **도넛 진행 링**: 완료율(80% 등) 노랑 링 + 큰 숫자 중앙 정렬.
+- **칩**: 작은 알약형 `rounded-xl` 태그. 카테고리·상태("Milestone", "Observation", "Action Item", "Optimal", "Up").
+- **내비게이션**: 극단적 단순함. 활성 탭은 노랑 알약 배경 + 진한 텍스트, 비활성은 아이콘+라벨만.
 
 ### 화면별 반복 요소 (목업 기준)
-- **상단 바**: 좌측 캐릭터 아바타 + "PTBM Quest" 로고, 우측 "🔥 5일 연속" 스트릭 칩.
-- **하단 탭바**: HOME / QUESTS / OBSERVE(관찰) / AI HELP / REPORT 5개. 활성 탭은 Primary 컬러 + 채움.
-- **진행 링/바**: 도넛형 완료율(80% 등), 가로 진행바(주간 진행도), 활성 요일은 채워진 원.
-- **AI/육아 팁 카드**: 말풍선 + 작은 일러스트, 따뜻한 surface-container 배경.
+- **상단 바**: 좌측 원형 아바타 + "Kids in Flow", 우측 "7 🔥" 스트릭 칩(연한 회색 알약).
+- **하단 탭바**: Dashboard / Quests / Observe / Reports 4개. 활성 탭은 노랑 배경 알약.
+- **선택 카드(라디오형)**: Help Level(None/Some/A lot)처럼 아이콘+제목+부제 카드를 세로로 쌓고, 선택 시 강조.
+- **슬라이더**: Focus Level(Distracted ↔ Deep Flow)처럼 양 끝 라벨 + 눈금.
+- **데이터 카드**: 큰 숫자(84/100), 추세 라벨("Optimal", "+12%"), 막대 그래프(활성 막대만 노랑, 나머지 회색).
 
 ## 이미지 / 에셋
 
@@ -137,22 +140,18 @@ spacing: { unit: 8px, gutter: 24px, margin-mobile: 20px, margin-desktop: 64px,
 
 ```
 img/
-  avatar-child.png        # 상단 캐릭터 아바타
-  illust-character.png    # 관찰 화면 상단 인물 일러스트
-  illust-book.png         # 퀘스트 수행 화면 책 일러스트
-  mascot-ghost.png        # 퀘스트 화면 말풍선 마스코트
-  mascot-cloud.png        # AI 최적화 화면 구름 캐릭터
-  illust-bulb.png         # 홈 '오늘의 육아 팁' 전구
-  illust-comics.png       # AI 최적화 '코믹스 3패널' 미리보기
+  avatar-child.png     # 상단 캐릭터 아바타(화면마다 다른 컷 가능)
+  illust-book.png      # 퀘스트 수행 화면 펼친 책 일러스트
+  mascot-cloud.png     # (사용 시) 분석 화면 캐릭터
 ```
 
-> 실제 파일명은 넣는 에셋에 맞춰 조정하고, 경로 상수는 한 곳(`src/data` 또는 `src/utils`)에 모아 관리.
+> 목업의 책 이미지처럼 사진/3D 렌더형 에셋은 카드 안에 `rounded-xl`로 배치하고, 배경 톤(연녹색 등)을 그대로 살린다. 실제 파일명은 넣는 에셋에 맞게 조정하고, 경로 상수는 한 곳(`src/data` 또는 `src/utils`)에 모은다.
 
 ## 화면 목록 (참고)
 
-목업 5종에 대응한다.
-1. **홈 대시보드** — 인사, 집중 지수 바, 오늘의 퀘스트 카드, 주간 진행도, 관찰/리포트 진입, 육아 팁.
-2. **퀘스트 수행** — "오늘의 미션" 칩, 큰 제목, 책 일러스트 카드, 미션 진행바, "다 읽었어요!" 버튼, 마스코트 말풍선.
-3. **관찰 기록** — 인물 일러스트 + 말풍선, 도움 수준(4지선다)·집중도(예/아니오)·멜트다운(없음/약간/심함) 객관식, 관찰 일지 textarea, "제출하고 AI 분석 보기" 버튼.
-4. **AI 최적화 결과** — "AI 분석 완료", 숙련도 Level 변화, 구름 캐릭터 말풍선, 맞춤 매체 리포트, 효과 지표 칩(+12% 등), 내일 예고 카드, "내일 퀘스트 확정하기".
-5. **리포트** — 진행 현황 요약, 퀘스트 완료율 도넛, 행동 경향 그래프(집중도/충동성), AI 심층 분석, 최근 임상 관찰 기록 표, 다음 예약 카드. 상단에 "PDF 생성"/"치료 계획 수정" 액션.
+목업 5종에 대응한다. (한국어 UI 기준, 라벨은 영문 병기)
+1. **Dashboard(홈)** — "Hi, Sarah." 인사, Today's Focus Score(84/100, 진행바, Optimal), Active Quest 노랑 카드("Resume Journey" 다크 버튼), Record Observation / Weekly Reports / Growth Library 진입 카드.
+2. **Quests(퀘스트 수행)** — "CURRENT QUEST" 라벨, 큰 제목("책 1페이지 읽기"), 책 일러스트 카드, Progress 진행바(0/1 page), "Finished!" 노랑 버튼.
+3. **Observe(관찰 기록)** — "New Observation", Activity Context 입력, Help Level(None/Some/A lot 선택 카드), Focus Level 슬라이더(Distracted↔Deep Flow), Observations & Notes textarea, "Save Observation"(노랑)/"Cancel"(고스트).
+4. **Reports(리포트)** — "Patient Progress Report", 대상 이름(Leo Harrison), Export PDF / Share 버튼, Quest Completion 도넛(80%), 세부 지표(Emotional Regulation 12/15 등), Behavioral Trends 막대 그래프(Focus/Impulsivity), Clinical Observations 카드 리스트(Milestone/Observation/Action Item 칩, +New Entry).
+5. **Analysis(분석 완료)** — "Lvl 2 Expertise" 배지, "Analysis Complete", Focus Deepened(+12%)·Memory Recall(Up) 지표 카드, Recommended Next 다크 카드("Start Quest" 노랑 버튼), Biometric Flow Sync 막대(Week/Month 토글, 활성 막대 노랑), Morning Window 팁 카드.

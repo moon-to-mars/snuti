@@ -1,92 +1,132 @@
 import { useState } from 'react'
-import { mockQuests } from '../data'
-import { QuestCard } from '../components/QuestCard'
-import { ObservationForm } from '../components/ObservationForm'
-import { SpeechBubble } from '../components/SpeechBubble'
+import { mockQuests, activeQuest } from '../data'
+import type { QuestTrack } from '../types'
 
-type Step = 'mission' | 'observe' | 'done'
+const TRACK_LABEL: Record<QuestTrack, string> = {
+  focus: '집중력',
+  emotion: '감정 조절',
+  behavior: '행동 교정',
+  parent_support: '부모 보조',
+}
 
-interface QuestPageProps {
+const TRACK_COLOR: Record<QuestTrack, string> = {
+  focus: 'bg-[#ffc83d] text-[#715400]',
+  emotion: 'bg-[#e4e2e2] text-[#4f4634]',
+  behavior: 'bg-[#e4e2e2] text-[#4f4634]',
+  parent_support: 'bg-[#e4e2e2] text-[#4f4634]',
+}
+
+interface QuestDetailProps {
   questId: string
-  onComplete: (questId: string, answers: Record<string, string>) => void
+  onComplete: () => void
   onBack: () => void
 }
 
-export function QuestPage({ questId, onComplete, onBack }: QuestPageProps) {
-  const [step, setStep] = useState<Step>('mission')
-  const quest = mockQuests.find((q) => q.id === questId)
-
-  if (!quest) return null
-
-  if (step === 'mission') {
-    return (
-      <div className="space-y-6">
-        <button onClick={onBack} className="text-sm font-bold text-[#727785] flex items-center gap-1 hover:text-[#414754]">
-          ← 홈으로
-        </button>
-
-        <div className="flex items-start gap-3 px-1">
-          <span className="text-3xl mt-1">👻</span>
-          <SpeechBubble variant="blue" className="flex-1">
-            오늘 미션이야! 할 수 있어, 같이 해보자 🎯
-          </SpeechBubble>
-        </div>
-
-        <div>
-          <span className="inline-block bg-[#d0a700] text-[#231b00] text-xs font-bold px-3 py-1 rounded-full mb-3">
-            오늘의 미션
-          </span>
-          <QuestCard quest={quest} />
-        </div>
-
-        <button
-          onClick={() => setStep('observe')}
-          className="w-full py-4 bg-[#1a73e8] text-white rounded-full text-base font-bold shadow-[0_4px_0_#005bbf] hover:-translate-y-0.5 active:translate-y-1 active:shadow-none transition-all"
-        >
-          미션 완료 → 관찰 기록하기
-        </button>
-      </div>
-    )
-  }
-
-  if (step === 'observe') {
-    return (
-      <div className="space-y-6">
-        <button onClick={() => setStep('mission')} className="text-sm font-bold text-[#727785] flex items-center gap-1 hover:text-[#414754]">
-          ← 미션으로
-        </button>
-
-        <div className="flex items-start gap-3 px-1">
-          <span className="text-3xl mt-1">🧑‍⚕️</span>
-          <SpeechBubble variant="orange" className="flex-1">
-            아이가 어떻게 수행했는지 알려주세요. 솔직하게 답할수록 AI 분석이 정확해져요!
-          </SpeechBubble>
-        </div>
-
-        <h1 className="text-lg font-bold text-[#231b00]">관찰 결과 기록</h1>
-        <ObservationForm
-          onSubmit={(answers) => {
-            onComplete(questId, answers)
-            setStep('done')
-          }}
-        />
-      </div>
-    )
-  }
+function QuestDetail({ questId, onComplete, onBack }: QuestDetailProps) {
+  const [progress, setProgress] = useState(0)
+  const quest = mockQuests.find((q) => q.id === questId) ?? activeQuest
 
   return (
-    <div className="flex flex-col items-center justify-center py-12 space-y-5">
-      <span className="text-6xl">🎉</span>
-      <h1 className="text-2xl font-bold text-[#231b00]">퀘스트 완료!</h1>
-      <SpeechBubble variant="orange" className="w-full">
-        기록 완료! AI가 분석 중이에요. 잠시 후 다음 퀘스트를 추천해드릴게요 ✨
-      </SpeechBubble>
+    <div className="space-y-6">
+      <button onClick={onBack} className="text-[13px] font-semibold text-[#817661] flex items-center gap-1 hover:text-[#1b1c1c]">
+        ← Back
+      </button>
+
+      <div className="text-center">
+        <span className="text-[11px] font-bold tracking-widest uppercase text-[#817661]">Current Quest</span>
+        <h1 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[32px] font-extrabold text-[#1b1c1c] mt-1 leading-tight">
+          {quest.title}
+        </h1>
+      </div>
+
+      {/* 일러스트 카드 */}
+      <div className="rounded-2xl overflow-hidden bg-[#d4e8d4] aspect-[4/3] flex items-center justify-center">
+        <span className="text-8xl">📖</span>
+      </div>
+
+      {/* 진행 바 */}
+      <div>
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-[14px] font-semibold text-[#4f4634]">Progress</span>
+          <span style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[18px] font-bold text-[#1b1c1c]">
+            {progress} / 1 <span className="text-[14px] font-normal text-[#817661]">page</span>
+          </span>
+        </div>
+        <div className="h-2 bg-[#e4e2e2] rounded-full overflow-hidden">
+          <div className="h-full bg-[#ffc83d] rounded-full transition-all" style={{ width: `${progress * 100}%` }} />
+        </div>
+      </div>
+
       <button
-        onClick={onBack}
-        className="mt-4 px-8 py-3.5 bg-[#1a73e8] text-white rounded-full font-bold shadow-[0_4px_0_#005bbf] hover:-translate-y-0.5 active:translate-y-1 active:shadow-none transition-all"
+        onClick={() => { setProgress(1); setTimeout(onComplete, 400) }}
+        className="w-full py-4 bg-[#ffc83d] text-[#715400] rounded-xl text-[17px] font-bold flex items-center justify-center gap-2 hover:bg-[#f5bf34] transition-colors"
       >
-        결과 보기
+        ✓ Finished!
       </button>
     </div>
   )
+}
+
+interface QuestsListProps {
+  onSelectQuest: (id: string) => void
+}
+
+function QuestsList({ onSelectQuest }: QuestsListProps) {
+  const byTrack = mockQuests.reduce<Record<QuestTrack, typeof mockQuests>>((acc, q) => {
+    if (!acc[q.track]) acc[q.track] = []
+    acc[q.track].push(q)
+    return acc
+  }, {} as Record<QuestTrack, typeof mockQuests>)
+
+  return (
+    <div className="space-y-6">
+      <h1 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[28px] font-bold text-[#1b1c1c]">
+        Quests
+      </h1>
+      {(Object.entries(byTrack) as [QuestTrack, typeof mockQuests][]).map(([track, quests]) => (
+        <div key={track}>
+          <div className="flex items-center justify-between mb-3">
+            <span className={`text-[12px] font-bold px-3 py-1 rounded-full ${TRACK_COLOR[track]}`}>
+              {TRACK_LABEL[track]}
+            </span>
+          </div>
+          <div className="space-y-2">
+            {quests.map((q) => (
+              <button
+                key={q.id}
+                onClick={() => onSelectQuest(q.id)}
+                className="w-full bg-white rounded-xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)] flex items-center justify-between text-left hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-shadow"
+              >
+                <div>
+                  <p className="text-[15px] font-semibold text-[#1b1c1c]">{q.title}</p>
+                  <p className="text-[13px] text-[#817661] mt-0.5">{q.durationMin}분 · 난이도 {q.difficulty}/5</p>
+                </div>
+                <span className="text-[#e4e2e2] text-lg">›</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+interface QuestPageProps {
+  initialQuestId?: string
+  onComplete: (questId: string) => void
+}
+
+export function QuestPage({ initialQuestId, onComplete }: QuestPageProps) {
+  const [selectedId, setSelectedId] = useState<string | null>(initialQuestId ?? null)
+
+  if (selectedId) {
+    return (
+      <QuestDetail
+        questId={selectedId}
+        onComplete={() => { onComplete(selectedId); setSelectedId(null) }}
+        onBack={() => setSelectedId(null)}
+      />
+    )
+  }
+  return <QuestsList onSelectQuest={(id) => setSelectedId(id)} />
 }

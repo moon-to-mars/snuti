@@ -1,104 +1,93 @@
-import { mockOptimizations, mockQuests } from '../data'
-import { SpeechBubble } from '../components/SpeechBubble'
+import { mockOptimizations } from '../data'
 
 interface OptimizationPageProps {
   completedQuestId: string
   onNext: () => void
 }
 
-const TRACK_LABEL = {
-  focus: '🧠 집중력',
-  behavior: '⭐ 행동 교정',
-  parent_support: '🤝 부모 보조',
-} as const
-
 export function OptimizationPage({ completedQuestId, onNext }: OptimizationPageProps) {
   const result = mockOptimizations.find((o) => o.previousQuestId === completedQuestId)
-  const prevQuest = mockQuests.find((q) => q.id === completedQuestId)
-
-  if (!result || !prevQuest) {
-    return (
-      <div className="space-y-6">
-        <div className="text-center py-8">
-          <span className="text-5xl">🤖</span>
-          <h1 className="text-xl font-bold text-[#231b00] mt-3">AI 분석 중</h1>
-        </div>
-        <button onClick={onNext} className="w-full py-4 bg-[#1a73e8] text-white rounded-full font-bold shadow-[0_4px_0_#005bbf]">
-          대시보드로 돌아가기
-        </button>
-      </div>
-    )
-  }
-
-  const levelBefore = prevQuest.difficulty
-  const levelAfter = result.nextQuest.difficulty
-  const levelDiff = levelAfter - levelBefore
+    ?? mockOptimizations[0]
 
   return (
     <div className="space-y-6">
-      <div className="text-center py-2">
-        <span className="text-5xl">☁️</span>
-        <h1 className="text-xl font-bold text-[#231b00] mt-2">AI 분석 완료</h1>
-      </div>
-
-      {/* 구름 캐릭터 말풍선 */}
-      <div className="flex items-start gap-3 px-1">
-        <span className="text-3xl mt-1">🌤️</span>
-        <SpeechBubble variant="blue" className="flex-1">
-          {result.rationale}
-        </SpeechBubble>
-      </div>
-
-      {/* Level 변화 */}
-      <div className="bg-[#fff3d7] rounded-[20px_24px_18px_22px] border-2 border-[#fae7b4] p-5">
-        <p className="text-xs font-bold text-[#727785] mb-3">숙련도 변화</p>
-        <div className="flex items-center justify-center gap-4">
-          <div className="text-center">
-            <p className="text-3xl font-bold text-[#727785]">Lv.{levelBefore}</p>
-            <p className="text-xs text-[#727785] mt-1">{prevQuest.title}</p>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-2xl">→</span>
-            {levelDiff !== 0 && (
-              <span className={`text-xs font-bold mt-0.5 ${levelDiff > 0 ? 'text-[#1a73e8]' : 'text-[#fc9b6c]'}`}>
-                {levelDiff > 0 ? `+${levelDiff}` : levelDiff}
-              </span>
-            )}
-          </div>
-          <div className="text-center">
-            <p className="text-3xl font-bold text-[#1a73e8]">Lv.{levelAfter}</p>
-            <p className="text-xs text-[#1a73e8] mt-1 font-semibold">{result.nextQuest.title}</p>
-          </div>
+      {/* Lvl 배지 */}
+      <div className="flex justify-center pt-2">
+        <div className="border-2 border-[#ffc83d] rounded-full w-20 h-20 flex flex-col items-center justify-center">
+          <span style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[18px] font-extrabold text-[#1b1c1c]">Lvl 2</span>
+          <span className="text-[9px] font-bold tracking-widest text-[#715400] uppercase">Expertise</span>
         </div>
       </div>
 
-      {/* 이전 vs 다음 비교 */}
-      <div className="grid grid-cols-2 gap-3">
-        <div className="bg-[#f4e1af] rounded-[16px_20px_14px_18px] border-2 border-[#ebd9a7] p-4">
-          <p className="text-xs font-bold text-[#727785] mb-1">이전 퀘스트</p>
-          <p className="text-sm font-bold text-[#727785] line-through">{prevQuest.title}</p>
-          <p className="text-xs text-[#727785] mt-1">{TRACK_LABEL[prevQuest.track]}</p>
+      <div className="text-center">
+        <h1 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[28px] font-extrabold text-[#1b1c1c]">Analysis Complete</h1>
+        <p className="text-[14px] text-[#817661] mt-1 leading-relaxed">{result.rationale}</p>
+      </div>
+
+      {/* 지표 카드 */}
+      {result.metrics.map((m) => (
+        <div key={m.label} className="bg-white rounded-2xl p-5 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+          <div className="flex items-start justify-between">
+            <span className="text-2xl">🎯</span>
+            <span className="text-[13px] font-bold text-[#785a00]">{m.value}</span>
+          </div>
+          <h3 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[18px] font-bold text-[#1b1c1c] mt-2">{m.label}</h3>
+          <p className="text-[13px] text-[#817661] mt-1 leading-relaxed">
+            {m.label === 'Focus Deepened'
+              ? 'Sustained attention span has increased by an average of 4.2 minutes during creative tasks.'
+              : 'Retention rates for new concepts are trending upward. Recall speed is 15% faster than baseline.'}
+          </p>
         </div>
-        <div className="bg-[#e8f0ff] rounded-[16px_20px_14px_18px] border-2 border-[#c5d8f7] p-4">
-          <p className="text-xs font-bold text-[#1a73e8] mb-1">내일 퀘스트</p>
-          <p className="text-sm font-bold text-[#231b00]">{result.nextQuest.title}</p>
-          <p className="text-xs text-[#1a73e8] mt-1 font-semibold">{TRACK_LABEL[result.nextQuest.track]}</p>
+      ))}
+
+      {/* Recommended Next 다크 카드 */}
+      <div className="bg-[#1b1c1c] rounded-2xl p-5">
+        <span className="text-[11px] font-bold tracking-widest uppercase text-[#817661]">Recommended Next</span>
+        <h2 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[22px] font-bold text-white mt-1 mb-1">
+          {result.nextQuest.title}
+        </h2>
+        <p className="text-[13px] text-[#dbdad9] mb-4">⏱ {result.nextQuest.durationMin} Minute Quest</p>
+        <button
+          onClick={onNext}
+          className="w-full py-3.5 bg-[#ffc83d] text-[#715400] rounded-xl text-[15px] font-bold hover:bg-[#f5bf34] transition-colors"
+        >
+          Start Quest
+        </button>
+      </div>
+
+      {/* Biometric Flow Sync 막대 */}
+      <div className="bg-white rounded-2xl p-5 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+        <div className="flex items-center justify-between mb-4">
+          <h3 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[18px] font-bold text-[#1b1c1c]">Biometric Flow Sync</h3>
+          <div className="flex gap-1.5">
+            {['Week', 'Month'].map((t) => (
+              <span key={t} className={`text-[12px] font-semibold px-3 py-1 rounded-full ${t === 'Month' ? 'bg-[#ffc83d] text-[#715400]' : 'text-[#817661]'}`}>{t}</span>
+            ))}
+          </div>
+        </div>
+        <div className="flex items-end gap-2 h-20">
+          {['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map((d, i) => {
+            const h = [30, 45, 40, 90, 55, 35, 60][i]
+            return (
+              <div key={d} className="flex-1 flex flex-col items-center gap-1">
+                <div className="w-full rounded-t" style={{ height: '70px', display: 'flex', alignItems: 'flex-end' }}>
+                  <div className={`w-full rounded-t ${d === 'Thu' ? 'bg-[#ffc83d]' : 'bg-[#e4e2e2]'}`} style={{ height: `${h}%` }} />
+                </div>
+                <span className="text-[10px] text-[#817661]">{d}</span>
+              </div>
+            )
+          })}
         </div>
       </div>
 
-      {/* 효과 지표 칩 */}
-      <div className="flex gap-2 flex-wrap">
-        <span className="bg-[#d0a700] text-[#231b00] text-xs font-bold px-3 py-1.5 rounded-full">+12% 집중도</span>
-        <span className="bg-[#1a73e8] text-white text-xs font-bold px-3 py-1.5 rounded-full">방해 행동 감소</span>
-        <span className="bg-[#fc9b6c] text-[#231b00] text-xs font-bold px-3 py-1.5 rounded-full">자립 수행 향상</span>
+      {/* Morning Window 팁 */}
+      <div className="bg-[#f5f3f3] rounded-2xl p-5 text-center">
+        <span className="text-2xl">💡</span>
+        <h3 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[18px] font-bold text-[#1b1c1c] mt-2">Morning Window</h3>
+        <p className="text-[14px] text-[#4f4634] mt-1 leading-relaxed">
+          Analysis suggests peak flow between 8:30 AM and 9:15 AM. Try scheduling logic puzzles then.
+        </p>
       </div>
-
-      <button
-        onClick={onNext}
-        className="w-full py-4 bg-[#1a73e8] text-white rounded-full text-base font-bold shadow-[0_4px_0_#005bbf] hover:-translate-y-0.5 active:translate-y-1 active:shadow-none transition-all"
-      >
-        내일 퀘스트 확정하기 →
-      </button>
     </div>
   )
 }

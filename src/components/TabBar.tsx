@@ -1,11 +1,10 @@
-export type Tab = 'home' | 'quests' | 'observe' | 'ai' | 'report'
+export type Tab = 'dashboard' | 'quests' | 'observe' | 'reports'
 
 const TABS: { value: Tab; label: string; icon: string }[] = [
-  { value: 'home', label: 'HOME', icon: '🏠' },
-  { value: 'quests', label: 'QUESTS', icon: '🎯' },
-  { value: 'observe', label: 'OBSERVE', icon: '📝' },
-  { value: 'ai', label: 'AI HELP', icon: '🤖' },
-  { value: 'report', label: 'REPORT', icon: '📊' },
+  { value: 'dashboard', label: 'Dashboard', icon: '⊞' },
+  { value: 'quests',    label: 'Quests',    icon: '✦' },
+  { value: 'observe',   label: 'Observe',   icon: '◎' },
+  { value: 'reports',   label: 'Reports',   icon: '▦' },
 ]
 
 interface TabBarProps {
@@ -15,25 +14,24 @@ interface TabBarProps {
 
 export function TabBar({ active, onChange }: TabBarProps) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-20 bg-[#fff8f0] border-t-2 border-[#f4e1af]">
-      <div className="max-w-md mx-auto flex">
+    <nav className="fixed bottom-0 left-0 right-0 z-20 bg-[#fbf9f8] border-t border-[#e4e2e2]">
+      <div className="max-w-md mx-auto flex px-2 py-2">
         {TABS.map((tab) => {
           const isActive = tab.value === active
           return (
             <button
               key={tab.value}
               onClick={() => onChange(tab.value)}
-              className={`flex-1 flex flex-col items-center gap-0.5 py-2.5 transition-all ${
-                isActive ? 'text-[#1a73e8]' : 'text-[#727785]'
+              className={`flex-1 flex flex-col items-center gap-0.5 py-1.5 px-2 rounded-xl transition-all ${
+                isActive ? 'bg-[#ffc83d]' : ''
               }`}
             >
-              <span className={`text-xl transition-transform ${isActive ? 'scale-110' : ''}`}>{tab.icon}</span>
-              <span className={`text-[10px] font-bold tracking-wide ${isActive ? 'text-[#1a73e8]' : 'text-[#727785]'}`}>
+              <span className="text-lg leading-none">{tab.icon}</span>
+              <span className={`text-[11px] font-semibold tracking-wide ${
+                isActive ? 'text-[#715400]' : 'text-[#817661]'
+              }`}>
                 {tab.label}
               </span>
-              {isActive && (
-                <span className="w-1 h-1 rounded-full bg-[#1a73e8] mt-0.5" />
-              )}
             </button>
           )
         })}

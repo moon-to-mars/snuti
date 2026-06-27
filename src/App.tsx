@@ -1,80 +1,84 @@
 import { useState } from 'react'
 import { Layout } from './components/Layout'
-import { useRole } from './hooks/useRole'
 import { type Tab } from './components/TabBar'
 import { ParentDashboard } from './pages/ParentDashboard'
 import { QuestPage } from './pages/QuestPage'
+import { ObservePage } from './pages/ObservePage'
 import { OptimizationPage } from './pages/OptimizationPage'
 import { ClinicianReport } from './pages/ClinicianReport'
-import { ChildQuestView } from './pages/ChildQuestView'
+import { mockChildren } from './data'
 
 type Screen =
-  | { name: 'dashboard' }
-  | { name: 'quest'; questId: string }
+  | { name: 'tab' }
   | { name: 'optimization'; completedQuestId: string }
 
+const child = mockChildren[0]
+
 export default function App() {
-  const { role, setRole } = useRole()
-  const [screen, setScreen] = useState<Screen>({ name: 'dashboard' })
-  const [activeTab, setActiveTab] = useState<Tab>('home')
-  const [completedQuests, setCompletedQuests] = useState<Record<string, Record<string, string>>>({})
+  const [activeTab, setActiveTab] = useState<Tab>('dashboard')
+  const [screen, setScreen] = useState<Screen>({ name: 'tab' })
+  const [startQuestId, setStartQuestId] = useState<string | undefined>()
 
   function handleStartQuest(questId: string) {
-    setScreen({ name: 'quest', questId })
+    setStartQuestId(questId)
     setActiveTab('quests')
+    setScreen({ name: 'tab' })
   }
 
-  function handleQuestComplete(questId: string, answers: Record<string, string>) {
-    setCompletedQuests((prev) => ({ ...prev, [questId]: answers }))
+  function handleQuestComplete(questId: string) {
+    setStartQuestId(undefined)
     setScreen({ name: 'optimization', completedQuestId: questId })
-    setActiveTab('ai')
   }
 
   function handleTabChange(tab: Tab) {
     setActiveTab(tab)
-    setScreen({ name: 'dashboard' })
+    setScreen({ name: 'tab' })
+    setStartQuestId(undefined)
   }
 
   function renderContent() {
-    if (role === 'child') return <ChildQuestView />
-    if (role === 'clinician') return <ClinicianReport />
-
-    // parent role
-    if (screen.name === 'quest') {
-      return (
-        <QuestPage
-          questId={screen.questId}
-          onComplete={handleQuestComplete}
-          onBack={() => { setScreen({ name: 'dashboard' }); setActiveTab('home') }}
-        />
-      )
-    }
     if (screen.name === 'optimization') {
       return (
         <OptimizationPage
           completedQuestId={screen.completedQuestId}
-          onNext={() => { setScreen({ name: 'dashboard' }); setActiveTab('home') }}
+          onNext={() => { setScreen({ name: 'tab' }); setActiveTab('dashboard') }}
         />
       )
     }
 
-    // tab-based parent views
-    if (activeTab === 'report') return <ClinicianReport />
-
-    return (
-      <ParentDashboard
-        onStartQuest={handleStartQuest}
-        completedQuests={completedQuests}
-      />
-    )
+    switch (activeTab) {
+      case 'dashboard':
+        return (
+          <ParentDashboard
+            child={child}
+            onStartQuest={handleStartQuest}
+            onTabChange={handleTabChange}
+          />
+        )
+      case 'quests':
+        return (
+          <QuestPage
+            initialQuestId={startQuestId}
+            onComplete={handleQuestComplete}
+          />
+        )
+      case 'observe':
+        return (
+          <ObservePage
+            onSave={() => { setActiveTab('dashboard') }}
+          />
+        )
+      case 'reports':
+        return <ClinicianReport />
+    }
   }
 
   return (
     <Layout
-      role={role}
-      onRoleChange={(r) => { setRole(r); setScreen({ name: 'dashboard' }); setActiveTab('home') }}
+      child={child}
       activeTab={activeTab}
       onTabChange={handleTabChange}
+      showTabs={screen.name === 'tab'}
     >
       {renderContent()}
     </Layout>

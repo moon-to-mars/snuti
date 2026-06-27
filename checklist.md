@@ -3,18 +3,18 @@
 PTBM 기반 유아 ADHD 행동 교정 웹앱 — **UI 프로토타입(화면만)** 진행 체크리스트.
 외부 연결(API·DB·인증·AI) 없이 목업 데이터로만 구성한다.
 
-## 0.5 디자인 시스템 (DESIGN.md 반영)
-- [x] Quicksand 폰트 로드 (Google Fonts → index.html)
-- [x] Tailwind 커스텀 컬러 토큰 등록 (surface, primary, secondary, tertiary 등)
-- [x] 전체 배경색 → 따뜻한 종이색 `#fff8f0`
-- [x] 헤더: 캐릭터 아바타 + 로고 + 스트릭 칩 (🔥 5일 연속)
-- [x] 하단 탭바: HOME / QUESTS / OBSERVE / AI HELP / REPORT
-- [x] QuestCard → 유기적 모서리 + 물리적 레이어(오프셋 배경) 깊이 표현
-- [x] 버튼 → 큼직한 알약형, bottom-heavy 보더 스타일
-- [x] 말풍선 컴포넌트 (AI 멘트·육아 팁용)
-- [x] 관찰 폼 → 3문항(도움 수준 4지 / 집중도 예·아니오 / 멜트다운 없음·약간·심함)
-- [x] 부모 홈: 도넛형 완료율 + 육아 팁 카드
-- [x] AI 최적화: Level 변화 + 구름 캐릭터 말풍선
+## 0.5 디자인 시스템 v2 (Luminous Flow — DESIGN.md + img 목업 반영)
+- [x] 폰트 교체: Hanken Grotesk(헤드라인) + Inter(본문) → index.html Google Fonts
+- [x] 컬러 토큰 전면 교체: Yellow #FFC83D 중심, 배경 #fbf9f8, 텍스트 #1b1c1c
+- [x] 브랜드 명칭 → "Kids in Flow"
+- [x] 헤더: 원형 아바타 + "Kids in Flow" + "7 🔥" 스트릭 칩(회색 알약)
+- [x] 하단 탭바 4개: Dashboard / Quests / Observe / Reports — 활성 탭 노랑 알약
+- [x] 탭 라우팅 실제 동작 구현 (각 탭에 맞는 화면 연결)
+- [x] Dashboard: "Hi, Sarah." + Today's Focus Score(84/100 진행바) + Active Quest 노랑 카드 + 진입 카드 3개
+- [x] Quests 탭: 퀘스트 분류(집중력·감정조절·행동교정·부모보조) + 분류별 성공률
+- [x] Observe 탭: Activity Context 입력 + Help Level(None/Some/A lot 선택 카드) + Focus Level 슬라이더 + Notes textarea
+- [x] Reports 탭: Quest Completion 도넛(80%) + 분류별 지표(Emotional Reg 12/15 등) + Behavioral Trends 막대 + Clinical Observations 카드 + 아이 약점 요약
+- [x] Analysis 화면: Lvl 배지 + 지표 카드 + Recommended Next 다크 카드 + 막대 그래프
 
 ## 0. 프로젝트 셋업
 - [x] 프레임워크 확정 (예: Vite + React) 후 CLAUDE.md 기술 스택 섹션 갱신
