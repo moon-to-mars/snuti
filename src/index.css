@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  /* Surface */
+  --color-surface: #fbf9f8;
+  --color-surface-dim: #dbdad9;
+  --color-surface-lowest: #ffffff;
+  --color-surface-low: #f5f3f3;
+  --color-surface-container: #efeded;
+  --color-surface-high: #e9e8e7;
+  --color-surface-highest: #e4e2e2;
+  --color-surface-variant: #e4e2e2;
+
+  /* Text */
+  --color-on-surface: #1b1c1c;
+  --color-on-surface-variant: #4f4634;
+  --color-outline: #817661;
+  --color-outline-variant: #d2c5ad;
+
+  /* Action — Yellow is the only real color */
+  --color-primary: #785a00;
+  --color-primary-container: #ffc83d;
+  --color-on-primary-container: #715400;
+  --color-secondary: #5f5e5e;
+  --color-secondary-container: #e2dfde;
+  --color-inverse-surface: #303031;
+  --color-inverse-on-surface: #f2f0f0;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+
+  /* Font families */
+  --font-display: 'Hanken Grotesk', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #fbf9f8;
+  color: #1b1c1c;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: 'Hanken Grotesk', sans-serif;
+}
