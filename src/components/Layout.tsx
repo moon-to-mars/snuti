@@ -21,7 +21,7 @@ export function Layout({ children, child, activeTab, onTabChange, showTabs = tru
               🧒
             </div>
             <span style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="font-bold text-[15px] text-[#1b1c1c]">
-              Kids in Flow
+              나루
             </span>
           </div>
           <div className="flex items-center gap-1.5 bg-[#e4e2e2] text-[#1b1c1c] text-[13px] font-semibold px-3 py-1 rounded-full">
