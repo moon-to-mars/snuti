@@ -1,4 +1,5 @@
-import { mockReports, activeQuest } from '../data'
+import { useState } from 'react'
+import { mockReports, activeQuest, dailyChecklist, parentingTips } from '../data'
 import type { Child } from '../types'
 import type { Tab } from '../components/TabBar'
 
@@ -9,9 +10,21 @@ interface ParentDashboardProps {
 }
 
 const report = mockReports[0]
+const todayTip = parentingTips[new Date().getDay() % parentingTips.length]
 
 export function ParentDashboard({ child, onStartQuest, onTabChange }: ParentDashboardProps) {
+  const [checked, setChecked] = useState<Set<string>>(new Set())
+  const [checklistOpen, setChecklistOpen] = useState(true)
+
   const scorePct = (report.focusScore / report.focusScoreMax) * 100
+
+  function toggle(id: string) {
+    setChecked((prev) => {
+      const next = new Set(prev)
+      next.has(id) ? next.delete(id) : next.add(id)
+      return next
+    })
+  }
 
   return (
     <div className="space-y-5">
@@ -23,6 +36,15 @@ export function ParentDashboard({ child, onStartQuest, onTabChange }: ParentDash
         <p className="text-[16px] text-[#4f4634] mt-1 leading-snug">
           {child.name}의 집중력이 오늘 아침 절정이에요.<br />지금 어떤 상황인지 확인해보세요.
         </p>
+      </div>
+
+      {/* 오늘의 육아 팁 */}
+      <div className="bg-[#1b1c1c] rounded-2xl p-4 flex gap-3 items-start">
+        <span className="text-xl shrink-0">💡</span>
+        <div>
+          <p className="text-[11px] font-bold tracking-widest uppercase text-[#817661] mb-1">오늘의 육아 팁</p>
+          <p className="text-[14px] text-[#dbdad9] leading-relaxed">{todayTip}</p>
+        </div>
       </div>
 
       {/* 집중 점수 카드 */}
@@ -43,6 +65,43 @@ export function ParentDashboard({ child, onStartQuest, onTabChange }: ParentDash
         <p className="text-[14px] text-[#4f4634] leading-relaxed">
           {child.name}이(가) 오늘 '논리적 추론' 활동에서 높은 참여도를 보이고 있어요. 어제 평균보다 집중력이 12% 더 높아요.
         </p>
+      </div>
+
+      {/* 하루 핵심 체크리스트 */}
+      <div className="bg-white rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] overflow-hidden">
+        <button
+          onClick={() => setChecklistOpen((o) => !o)}
+          className="w-full flex items-center justify-between p-5 text-left"
+        >
+          <div>
+            <p className="text-[15px] font-semibold text-[#1b1c1c]">하루 핵심 체크리스트</p>
+            <p className="text-[12px] text-[#817661] mt-0.5">
+              {checked.size}/{dailyChecklist.length}개 완료
+            </p>
+          </div>
+          <span className="text-[#d2c5ad] text-lg">{checklistOpen ? '∧' : '∨'}</span>
+        </button>
+        {checklistOpen && (
+          <div className="px-5 pb-5 space-y-2.5 border-t border-[#f5f3f3] pt-4">
+            {dailyChecklist.map((item) => {
+              const done = checked.has(item.id)
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => toggle(item.id)}
+                  className="w-full flex items-center gap-3 text-left"
+                >
+                  <div className={`w-5 h-5 rounded-full shrink-0 flex items-center justify-center border-2 transition-colors ${done ? 'bg-[#ffc83d] border-[#ffc83d]' : 'border-[#d2c5ad]'}`}>
+                    {done && <span className="text-[10px] font-bold text-[#715400]">✓</span>}
+                  </div>
+                  <span className={`text-[14px] ${done ? 'line-through text-[#b0a898]' : 'text-[#1b1c1c]'}`}>
+                    {item.label}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+        )}
       </div>
 
       {/* 진행 중인 퀘스트 카드 */}

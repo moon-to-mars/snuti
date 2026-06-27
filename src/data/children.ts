@@ -3,8 +3,8 @@ import type { Child } from '../types'
 export const mockChildren: Child[] = [
   {
     id: 'child-1',
-    name: 'Leo',
-    parentName: 'Sarah',
+    name: '준호',
+    parentName: '이수진',
     age: 7,
     adhdType: 'combined',
     parentingEnv: '맞벌이 가정, 외조모 주 양육',

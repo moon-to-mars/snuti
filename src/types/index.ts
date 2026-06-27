@@ -17,21 +17,32 @@ export interface Quest {
   childId: string
   track: QuestTrack
   title: string
+  childPrompt?: string
   instruction: string
+  encouragement?: string
   difficulty: number
   durationMin: number
 }
+
+export type HelpLevel = 'none' | 'little' | 'often' | 'full'
+export type MeltdownLevel = 'none' | 'mild' | 'severe'
 
 export interface Observation {
   id: string
   questId: string
   childId: string
   activityContext: string
-  helpLevel: 'none' | 'some' | 'alot'
-  focusLevel: number        // 0–10
+  helpLevel: HelpLevel
+  focusYn: 'yes' | 'no'
+  meltdown: MeltdownLevel
   notes: string
   completed: boolean
   date: string
+}
+
+export interface DailyChecklistItem {
+  id: string
+  label: string
 }
 
 export interface CategoryStat {

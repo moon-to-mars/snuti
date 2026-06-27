@@ -8,6 +8,12 @@ interface OptimizationPageProps {
 const DAYS = ['월', '화', '수', '목', '금', '토', '일']
 const BAR_HEIGHTS = [30, 45, 40, 90, 55, 35, 60]
 
+const BULLETS = [
+  '코믹스 형태의 퀘스트에서 집중도와 정답률이 더 높게 나타났습니다.',
+  '이미지 결합형 방식이 텍스트 위주보다 학습 효율이 뛰어납니다.',
+  '이에 따라 시각 정보가 강화된 환경으로 자동 전환합니다.',
+]
+
 export function OptimizationPage({ completedQuestId, onNext }: OptimizationPageProps) {
   const result = mockOptimizations.find((o) => o.previousQuestId === completedQuestId)
     ?? mockOptimizations[0]
@@ -22,37 +28,36 @@ export function OptimizationPage({ completedQuestId, onNext }: OptimizationPageP
         </div>
       </div>
 
-      <div className="text-center">
-        <h1 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[28px] font-extrabold text-[#1b1c1c]">분석 완료</h1>
-        <p className="text-[14px] text-[#817661] mt-1 leading-relaxed">
-          몰입 상태가 안정화되고 있어요. 최근 72시간의 활동을 분석해 학습 경로를 최적화했어요.
+      {/* AI 분석 캐릭터 메시지 */}
+      <div className="bg-[#ffc83d] rounded-2xl p-5">
+        <p className="text-[11px] font-bold tracking-widest uppercase text-[#715400] mb-2">AI 분석 완료</p>
+        <p style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[20px] font-bold text-[#1b1c1c] leading-snug">
+          {result.rationale}
         </p>
       </div>
 
+      {/* 분석 근거 bullets */}
+      <div className="bg-white rounded-2xl p-5 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+        <p className="text-[13px] font-bold text-[#817661] uppercase tracking-wide mb-3">분석 근거</p>
+        <ul className="space-y-3">
+          {BULLETS.map((b, i) => (
+            <li key={i} className="flex gap-3 items-start">
+              <span className="w-5 h-5 rounded-full bg-[#ffc83d] flex items-center justify-center text-[11px] font-bold text-[#715400] shrink-0 mt-0.5">{i + 1}</span>
+              <span className="text-[13px] text-[#4f4634] leading-relaxed">{b}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       {/* 지표 카드 */}
-      {[
-        {
-          icon: '🎯',
-          label: '집중력 향상',
-          value: '+12%',
-          desc: '창의적 활동 중 평균 지속 집중 시간이 4.2분 증가했어요.',
-        },
-        {
-          icon: '🧠',
-          label: '기억 회상',
-          value: '상승',
-          desc: '새로운 개념의 기억 유지율이 상승 추세예요. 기준치보다 15% 빠른 속도예요.',
-        },
-      ].map((m) => (
-        <div key={m.label} className="bg-white rounded-2xl p-5 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-          <div className="flex items-start justify-between">
-            <span className="text-2xl">{m.icon}</span>
-            <span className="text-[13px] font-bold text-[#785a00]">{m.value}</span>
+      <div className="grid grid-cols-3 gap-2">
+        {result.metrics.map((m) => (
+          <div key={m.label} className="bg-white rounded-xl p-3 shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-center">
+            <span style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[20px] font-extrabold text-[#1b1c1c] block">{m.value}</span>
+            <span className="text-[11px] text-[#817661]">{m.label}</span>
           </div>
-          <h3 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[18px] font-bold text-[#1b1c1c] mt-2">{m.label}</h3>
-          <p className="text-[13px] text-[#817661] mt-1 leading-relaxed">{m.desc}</p>
-        </div>
-      ))}
+        ))}
+      </div>
 
       {/* 다음 추천 다크 카드 */}
       <div className="bg-[#1b1c1c] rounded-2xl p-5">
@@ -61,11 +66,14 @@ export function OptimizationPage({ completedQuestId, onNext }: OptimizationPageP
           {result.nextQuest.title}
         </h2>
         <p className="text-[13px] text-[#dbdad9] mb-4">⏱ {result.nextQuest.durationMin}분 퀘스트</p>
+        {result.nextQuest.childPrompt && (
+          <p className="text-[13px] text-[#dbdad9] mb-4 italic">"{result.nextQuest.childPrompt}"</p>
+        )}
         <button
           onClick={onNext}
           className="w-full py-3.5 bg-[#ffc83d] text-[#715400] rounded-xl text-[15px] font-bold hover:bg-[#f5bf34] transition-colors"
         >
-          퀘스트 시작하기
+          내일 퀘스트 확정하기
         </button>
       </div>
 
