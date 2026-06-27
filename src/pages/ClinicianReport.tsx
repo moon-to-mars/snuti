@@ -2,10 +2,10 @@ import { mockReports, mockChildren } from '../data'
 import type { QuestTrack, ClinicalEntry } from '../types'
 
 const TRACK_LABEL: Record<QuestTrack, string> = {
-  focus: 'Executive Focus',
-  emotion: 'Emotional Regulation',
-  behavior: 'Behavior Control',
-  parent_support: 'Parent Support',
+  focus:          '집중력',
+  emotion:        '감정 조절',
+  behavior:       '행동 교정',
+  parent_support: '부모 보조',
 }
 
 const CHIP_STYLE: Record<ClinicalEntry['type'], string> = {
@@ -14,9 +14,9 @@ const CHIP_STYLE: Record<ClinicalEntry['type'], string> = {
   action:      'bg-[#ffdad6] text-[#ba1a1a]',
 }
 const CHIP_LABEL: Record<ClinicalEntry['type'], string> = {
-  milestone:   'Milestone',
-  observation: 'Observation',
-  action:      'Action Item',
+  milestone:   '마일스톤',
+  observation: '관찰',
+  action:      '실행 항목',
 }
 
 const report = mockReports[0]
@@ -32,25 +32,25 @@ export function ClinicianReport() {
     <div className="space-y-5">
       {/* 헤더 */}
       <div>
-        <span className="text-[11px] font-bold tracking-widest uppercase text-[#817661]">Patient Progress Report</span>
+        <span className="text-[11px] font-bold tracking-widest uppercase text-[#817661]">아동 성장 리포트</span>
         <h1 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[28px] font-extrabold text-[#1b1c1c] mt-0.5">
-          {child.name} Harrison
+          {child.name}
         </h1>
-        <p className="text-[13px] text-[#817661] mt-0.5">Assessment Period: Oct 1 – Oct 31, 2023</p>
+        <p className="text-[13px] text-[#817661] mt-0.5">평가 기간: 2023년 10월 1일 – 31일</p>
         <div className="flex gap-2 mt-3">
           <button className="flex items-center gap-1.5 px-4 py-2 border border-[#d2c5ad] rounded-lg text-[13px] font-semibold text-[#1b1c1c] hover:bg-[#f5f3f3] transition-colors">
-            ⬇ Export PDF
+            ⬇ PDF 내보내기
           </button>
           <button className="flex items-center gap-1.5 px-4 py-2 bg-[#ffc83d] rounded-lg text-[13px] font-semibold text-[#715400] hover:bg-[#f5bf34] transition-colors">
-            ↗ Share with Parents
+            ↗ 부모에게 공유
           </button>
         </div>
       </div>
 
-      {/* Quest Completion 도넛 */}
+      {/* 퀘스트 완료율 도넛 */}
       <div className="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
-        <p className="text-[15px] font-semibold text-[#1b1c1c] mb-0.5">Quest Completion</p>
-        <p className="text-[13px] text-[#817661] mb-4">Consistency across focused flow sessions.</p>
+        <p className="text-[15px] font-semibold text-[#1b1c1c] mb-0.5">퀘스트 완료율</p>
+        <p className="text-[13px] text-[#817661] mb-4">집중 몰입 세션 전반의 꾸준함.</p>
         <div className="flex items-center justify-center mb-4">
           <svg width="120" height="120" viewBox="0 0 120 120">
             <circle cx="60" cy="60" r="46" fill="none" stroke="#e4e2e2" strokeWidth="12"/>
@@ -62,7 +62,7 @@ export function ClinicianReport() {
               strokeLinecap="round"
             />
             <text x="60" y="56" textAnchor="middle" style={{ fontFamily: 'Hanken Grotesk, sans-serif', fontSize: 22, fontWeight: 800, fill: '#1b1c1c' }}>{completionPct}%</text>
-            <text x="60" y="72" textAnchor="middle" style={{ fontFamily: 'Inter, sans-serif', fontSize: 11, fill: '#817661' }}>Completed</text>
+            <text x="60" y="72" textAnchor="middle" style={{ fontFamily: 'Inter, sans-serif', fontSize: 11, fill: '#817661' }}>완료</text>
           </svg>
         </div>
         {/* 카테고리별 성공률 */}
@@ -91,13 +91,13 @@ export function ClinicianReport() {
         </ul>
       </div>
 
-      {/* Behavioral Trends 막대 */}
+      {/* 행동 경향 분석 막대 */}
       <div className="bg-white rounded-2xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
         <div className="flex items-center gap-4 mb-4">
-          <p style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[18px] font-bold text-[#1b1c1c]">Behavioral Trends</p>
+          <p style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[18px] font-bold text-[#1b1c1c]">행동 경향 분석</p>
           <div className="flex items-center gap-3 text-[12px]">
-            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#ffc83d] inline-block"/>Focus</span>
-            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#e4e2e2] inline-block"/>Impulsivity</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#ffc83d] inline-block"/>집중력</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#e4e2e2] inline-block"/>충동성</span>
           </div>
         </div>
         <div className="flex items-end gap-3 h-28">
@@ -113,11 +113,11 @@ export function ClinicianReport() {
         </div>
       </div>
 
-      {/* Clinical Observations */}
+      {/* 임상 관찰 기록 */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <p style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[20px] font-bold text-[#1b1c1c]">Clinical Observations</p>
-          <button className="text-[13px] font-semibold text-[#785a00]">+ New Entry</button>
+          <p style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[20px] font-bold text-[#1b1c1c]">임상 관찰 기록</p>
+          <button className="text-[13px] font-semibold text-[#785a00]">+ 새 항목</button>
         </div>
         <div className="space-y-3">
           {report.clinicalEntries.map((entry) => (

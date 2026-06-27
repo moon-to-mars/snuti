@@ -3,9 +3,9 @@ import { useState } from 'react'
 type HelpLevel = 'none' | 'some' | 'alot'
 
 const HELP_OPTIONS: { value: HelpLevel; icon: string; label: string; sub: string }[] = [
-  { value: 'none', icon: '😊', label: 'None', sub: 'Independent' },
-  { value: 'some', icon: '🤝', label: 'Some', sub: 'Guided' },
-  { value: 'alot', icon: '⚙️', label: 'A lot', sub: 'Full Support' },
+  { value: 'none', icon: '😊', label: '없음', sub: '혼자서' },
+  { value: 'some', icon: '🤝', label: '약간', sub: '함께' },
+  { value: 'alot', icon: '⚙️', label: '많이', sub: '전적 지원' },
 ]
 
 interface ObservePageProps {
@@ -24,29 +24,29 @@ export function ObservePage({ onSave }: ObservePageProps) {
     <div className="space-y-7">
       <div>
         <h1 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[28px] font-extrabold text-[#1b1c1c]">
-          New Observation
+          새 관찰 기록
         </h1>
-        <p className="text-[15px] text-[#817661] mt-1">Documenting a moment of flow and learning.</p>
+        <p className="text-[15px] text-[#817661] mt-1">몰입과 학습의 순간을 기록해요.</p>
       </div>
 
-      {/* Activity Context */}
+      {/* 활동 맥락 */}
       <div>
-        <p className="text-[11px] font-bold tracking-widest uppercase text-[#817661] mb-3">Activity Context</p>
+        <p className="text-[11px] font-bold tracking-widest uppercase text-[#817661] mb-3">활동 맥락</p>
         <div className="bg-white rounded-xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-          <p className="text-[13px] font-semibold text-[#1b1c1c] mb-2">What is the child working on?</p>
+          <p className="text-[13px] font-semibold text-[#1b1c1c] mb-2">아이가 무엇을 하고 있었나요?</p>
           <input
             type="text"
             value={context}
             onChange={(e) => setContext(e.target.value)}
-            placeholder="e.g., Building a block tower, painting..."
+            placeholder="예: 블록 쌓기, 그림 그리기, 책 읽기..."
             className="w-full text-[14px] text-[#4f4634] placeholder-[#d2c5ad] bg-transparent border border-[#e4e2e2] rounded-lg px-3 py-2 focus:outline-none focus:border-[#1b1c1c] transition-colors"
           />
         </div>
       </div>
 
-      {/* Help Level */}
+      {/* 도움 수준 */}
       <div>
-        <p className="text-[11px] font-bold tracking-widest uppercase text-[#817661] mb-3">Help Level</p>
+        <p className="text-[11px] font-bold tracking-widest uppercase text-[#817661] mb-3">도움 수준</p>
         <div className="space-y-2">
           {HELP_OPTIONS.map((opt) => (
             <button
@@ -66,13 +66,13 @@ export function ObservePage({ onSave }: ObservePageProps) {
         </div>
       </div>
 
-      {/* Focus Level 슬라이더 */}
+      {/* 집중 수준 슬라이더 */}
       <div>
-        <p className="text-[11px] font-bold tracking-widest uppercase text-[#817661] mb-3">Focus Level</p>
+        <p className="text-[11px] font-bold tracking-widest uppercase text-[#817661] mb-3">집중 수준</p>
         <div className="bg-white rounded-xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
           <div className="flex justify-between text-[13px] font-semibold mb-3">
-            <span className="text-[#817661]">⊖ Distracted</span>
-            <span className="text-[#715400] font-bold">Deep Flow ✦</span>
+            <span className="text-[#817661]">⊖ 산만함</span>
+            <span className="text-[#715400] font-bold">깊은 집중 ✦</span>
           </div>
           <input
             type="range"
@@ -90,15 +90,15 @@ export function ObservePage({ onSave }: ObservePageProps) {
         </div>
       </div>
 
-      {/* Observations & Notes */}
+      {/* 관찰 내용 및 메모 */}
       <div>
-        <p className="text-[11px] font-bold tracking-widest uppercase text-[#817661] mb-3">Observations & Notes</p>
+        <p className="text-[11px] font-bold tracking-widest uppercase text-[#817661] mb-3">관찰 내용 및 메모</p>
         <div className="bg-white rounded-xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-          <p className="text-[13px] font-semibold text-[#4f4634] mb-2">Tell us more about this moment...</p>
+          <p className="text-[13px] font-semibold text-[#4f4634] mb-2">이 순간에 대해 더 이야기해주세요...</p>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            placeholder="What were they saying? What challenges did they overcome?"
+            placeholder="아이가 무슨 말을 했나요? 어떤 어려움을 극복했나요?"
             rows={4}
             className="w-full text-[14px] text-[#4f4634] placeholder-[#d2c5ad] bg-[#f5f3f3] border border-[#e4e2e2] rounded-lg px-3 py-2 resize-none focus:outline-none focus:border-[#1b1c1c] transition-colors"
           />
@@ -116,13 +116,13 @@ export function ObservePage({ onSave }: ObservePageProps) {
               : 'bg-[#e4e2e2] text-[#a0a0a0] cursor-not-allowed'
           }`}
         >
-          Save Observation
+          관찰 저장
         </button>
         <button
           onClick={() => { setContext(''); setHelpLevel(null); setFocusLevel(5); setNotes('') }}
           className="w-full py-3.5 rounded-xl text-[15px] font-semibold border border-[#d2c5ad] text-[#1b1c1c] hover:bg-[#f5f3f3] transition-colors"
         >
-          Cancel
+          취소
         </button>
       </div>
     </div>

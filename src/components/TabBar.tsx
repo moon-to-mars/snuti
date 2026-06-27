@@ -1,10 +1,10 @@
 export type Tab = 'dashboard' | 'quests' | 'observe' | 'reports'
 
 const TABS: { value: Tab; label: string; icon: string }[] = [
-  { value: 'dashboard', label: 'Dashboard', icon: '⊞' },
-  { value: 'quests',    label: 'Quests',    icon: '✦' },
-  { value: 'observe',   label: 'Observe',   icon: '◎' },
-  { value: 'reports',   label: 'Reports',   icon: '▦' },
+  { value: 'dashboard', label: '홈',    icon: '⊞' },
+  { value: 'quests',    label: '퀘스트', icon: '✦' },
+  { value: 'observe',   label: '관찰',   icon: '◎' },
+  { value: 'reports',   label: '리포트', icon: '▦' },
 ]
 
 interface TabBarProps {
@@ -27,9 +27,7 @@ export function TabBar({ active, onChange }: TabBarProps) {
               }`}
             >
               <span className="text-lg leading-none">{tab.icon}</span>
-              <span className={`text-[11px] font-semibold tracking-wide ${
-                isActive ? 'text-[#715400]' : 'text-[#817661]'
-              }`}>
+              <span className={`text-[11px] font-semibold ${isActive ? 'text-[#715400]' : 'text-[#817661]'}`}>
                 {tab.label}
               </span>
             </button>

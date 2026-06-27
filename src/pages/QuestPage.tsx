@@ -29,11 +29,11 @@ function QuestDetail({ questId, onComplete, onBack }: QuestDetailProps) {
   return (
     <div className="space-y-6">
       <button onClick={onBack} className="text-[13px] font-semibold text-[#817661] flex items-center gap-1 hover:text-[#1b1c1c]">
-        ← Back
+        ← 돌아가기
       </button>
 
       <div className="text-center">
-        <span className="text-[11px] font-bold tracking-widest uppercase text-[#817661]">Current Quest</span>
+        <span className="text-[11px] font-bold tracking-widest uppercase text-[#817661]">현재 퀘스트</span>
         <h1 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[32px] font-extrabold text-[#1b1c1c] mt-1 leading-tight">
           {quest.title}
         </h1>
@@ -47,9 +47,9 @@ function QuestDetail({ questId, onComplete, onBack }: QuestDetailProps) {
       {/* 진행 바 */}
       <div>
         <div className="flex justify-between items-center mb-2">
-          <span className="text-[14px] font-semibold text-[#4f4634]">Progress</span>
+          <span className="text-[14px] font-semibold text-[#4f4634]">진행도</span>
           <span style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[18px] font-bold text-[#1b1c1c]">
-            {progress} / 1 <span className="text-[14px] font-normal text-[#817661]">page</span>
+            {progress} / 1 <span className="text-[14px] font-normal text-[#817661]">페이지</span>
           </span>
         </div>
         <div className="h-2 bg-[#e4e2e2] rounded-full overflow-hidden">
@@ -61,7 +61,7 @@ function QuestDetail({ questId, onComplete, onBack }: QuestDetailProps) {
         onClick={() => { setProgress(1); setTimeout(onComplete, 400) }}
         className="w-full py-4 bg-[#ffc83d] text-[#715400] rounded-xl text-[17px] font-bold flex items-center justify-center gap-2 hover:bg-[#f5bf34] transition-colors"
       >
-        ✓ Finished!
+        ✓ 완료했어요!
       </button>
     </div>
   )
@@ -81,7 +81,7 @@ function QuestsList({ onSelectQuest }: QuestsListProps) {
   return (
     <div className="space-y-6">
       <h1 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[28px] font-bold text-[#1b1c1c]">
-        Quests
+        퀘스트
       </h1>
       {(Object.entries(byTrack) as [QuestTrack, typeof mockQuests][]).map(([track, quests]) => (
         <div key={track}>
@@ -101,7 +101,7 @@ function QuestsList({ onSelectQuest }: QuestsListProps) {
                   <p className="text-[15px] font-semibold text-[#1b1c1c]">{q.title}</p>
                   <p className="text-[13px] text-[#817661] mt-0.5">{q.durationMin}분 · 난이도 {q.difficulty}/5</p>
                 </div>
-                <span className="text-[#e4e2e2] text-lg">›</span>
+                <span className="text-[#d2c5ad] text-lg">›</span>
               </button>
             ))}
           </div>
