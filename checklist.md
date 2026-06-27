@@ -3,6 +3,19 @@
 PTBM 기반 유아 ADHD 행동 교정 웹앱 — **UI 프로토타입(화면만)** 진행 체크리스트.
 외부 연결(API·DB·인증·AI) 없이 목업 데이터로만 구성한다.
 
+## 0.5 디자인 시스템 (DESIGN.md 반영)
+- [x] Quicksand 폰트 로드 (Google Fonts → index.html)
+- [x] Tailwind 커스텀 컬러 토큰 등록 (surface, primary, secondary, tertiary 등)
+- [x] 전체 배경색 → 따뜻한 종이색 `#fff8f0`
+- [x] 헤더: 캐릭터 아바타 + 로고 + 스트릭 칩 (🔥 5일 연속)
+- [x] 하단 탭바: HOME / QUESTS / OBSERVE / AI HELP / REPORT
+- [x] QuestCard → 유기적 모서리 + 물리적 레이어(오프셋 배경) 깊이 표현
+- [x] 버튼 → 큼직한 알약형, bottom-heavy 보더 스타일
+- [x] 말풍선 컴포넌트 (AI 멘트·육아 팁용)
+- [x] 관찰 폼 → 3문항(도움 수준 4지 / 집중도 예·아니오 / 멜트다운 없음·약간·심함)
+- [x] 부모 홈: 도넛형 완료율 + 육아 팁 카드
+- [x] AI 최적화: Level 변화 + 구름 캐릭터 말풍선
+
 ## 0. 프로젝트 셋업
 - [x] 프레임워크 확정 (예: Vite + React) 후 CLAUDE.md 기술 스택 섹션 갱신
 - [x] TypeScript `strict: true` 설정 확인

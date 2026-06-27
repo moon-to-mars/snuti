@@ -3,24 +3,27 @@ import type { Quest } from '../types'
 const TRACK_CONFIG = {
   focus: {
     label: '집중력',
-    bg: 'bg-blue-50',
-    border: 'border-blue-200',
-    badge: 'bg-blue-100 text-blue-700',
-    dot: 'bg-blue-500',
+    bg: 'bg-[#e8f0ff]',
+    offsetBg: 'bg-[#c5d8f7]',
+    badge: 'bg-[#1a73e8] text-white',
+    dot: 'bg-[#1a73e8]',
+    border: 'border-[#1a73e8]',
   },
   behavior: {
     label: '행동 교정',
-    bg: 'bg-green-50',
-    border: 'border-green-200',
-    badge: 'bg-green-100 text-green-700',
-    dot: 'bg-green-500',
+    bg: 'bg-[#fff3d7]',
+    offsetBg: 'bg-[#fae7b4]',
+    badge: 'bg-[#d0a700] text-[#231b00]',
+    dot: 'bg-[#d0a700]',
+    border: 'border-[#d0a700]',
   },
   parent_support: {
     label: '부모 보조',
-    bg: 'bg-orange-50',
-    border: 'border-orange-200',
-    badge: 'bg-orange-100 text-orange-700',
-    dot: 'bg-orange-500',
+    bg: 'bg-[#fff0ea]',
+    offsetBg: 'bg-[#fcc9a9]',
+    badge: 'bg-[#fc9b6c] text-[#231b00]',
+    dot: 'bg-[#fc9b6c]',
+    border: 'border-[#fc9b6c]',
   },
 } as const
 
@@ -33,34 +36,41 @@ interface QuestCardProps {
 export function QuestCard({ quest, onClick, completed = false }: QuestCardProps) {
   const cfg = TRACK_CONFIG[quest.track]
   return (
-    <button
-      onClick={onClick}
-      className={`w-full text-left rounded-2xl border p-4 transition-all ${cfg.bg} ${cfg.border} ${
-        onClick ? 'hover:shadow-md active:scale-[0.99]' : 'cursor-default'
-      } ${completed ? 'opacity-50' : ''}`}
-    >
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex-1">
-          <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full mb-2 ${cfg.badge}`}>
-            {cfg.label}
-          </span>
-          <p className={`font-semibold text-gray-800 ${completed ? 'line-through' : ''}`}>
-            {quest.title}
-          </p>
-          <p className="text-sm text-gray-500 mt-1">{quest.instruction}</p>
+    <div className="relative">
+      {/* 물리적 깊이 — 오프셋 배경 레이어 */}
+      <div className={`absolute inset-0 translate-x-1.5 translate-y-1.5 rounded-[24px_18px_28px_20px] ${cfg.offsetBg}`} />
+
+      <button
+        onClick={onClick}
+        disabled={!onClick}
+        className={`relative w-full text-left rounded-[24px_18px_28px_20px] border-2 p-5 transition-all
+          ${cfg.bg} ${cfg.border}
+          ${onClick ? 'hover:-translate-y-0.5 active:translate-x-0.5 active:translate-y-0.5' : 'cursor-default'}
+          ${completed ? 'opacity-50' : ''}`}
+      >
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex-1">
+            <span className={`inline-block text-xs font-bold px-2.5 py-1 rounded-full mb-2 ${cfg.badge}`}>
+              {cfg.label}
+            </span>
+            <p className={`font-bold text-[#231b00] text-base ${completed ? 'line-through opacity-60' : ''}`}>
+              {quest.title}
+            </p>
+            <p className="text-sm text-[#414754] mt-1 font-medium leading-relaxed">{quest.instruction}</p>
+          </div>
+          <div className="flex flex-col items-center gap-1 shrink-0 mt-1">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <span
+                key={i}
+                className={`w-2.5 h-2.5 rounded-full ${i < quest.difficulty ? cfg.dot : 'bg-[#c1c6d6]'}`}
+              />
+            ))}
+          </div>
         </div>
-        <div className="flex items-center gap-0.5 shrink-0 mt-1">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <span
-              key={i}
-              className={`w-2 h-2 rounded-full ${i < quest.difficulty ? cfg.dot : 'bg-gray-200'}`}
-            />
-          ))}
-        </div>
-      </div>
-      {completed && (
-        <p className="text-xs text-gray-400 mt-2">완료됨 ✓</p>
-      )}
-    </button>
+        {completed && (
+          <p className="text-xs text-[#727785] mt-2 font-semibold">완료 ✓</p>
+        )}
+      </button>
+    </div>
   )
 }
