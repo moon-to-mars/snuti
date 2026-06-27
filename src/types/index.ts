@@ -24,17 +24,14 @@ export interface Quest {
   durationMin: number
 }
 
-export type HelpLevel = 'none' | 'little' | 'often' | 'full'
-export type MeltdownLevel = 'none' | 'mild' | 'severe'
-
 export interface Observation {
   id: string
   questId: string
   childId: string
-  activityContext: string
-  helpLevel: HelpLevel
-  focusYn: 'yes' | 'no'
-  meltdown: MeltdownLevel
+  activityContext: string   // 선택된 활동 레이블
+  helpLevel: number         // 1(전적 지원) ~ 10(완전 자립)
+  focusLevel: number        // 1(산만) ~ 10(완전 집중)
+  selfRegulation: number    // 1(매우 어려움) ~ 10(잘 조절함)
   notes: string
   completed: boolean
   date: string

@@ -123,9 +123,8 @@ export function ParentDashboard({ child, onStartQuest, onTabChange }: ParentDash
 
       {/* 진입 카드 3개 */}
       {[
-        { icon: '◎', title: '관찰 기록하기',   sub: '새로운 몰입 순간을 기록해요',   tab: 'observe' as Tab },
-        { icon: '▦', title: '주간 리포트',      sub: '시간별 성장 내용을 분석해요',   tab: 'reports' as Tab },
-        { icon: '📚', title: '성장 라이브러리', sub: '부모를 위한 몰입 육아 자료',    tab: 'dashboard' as Tab },
+        { icon: '◎', title: '관찰 기록하기', sub: '새로운 몰입 순간을 기록해요', tab: 'observe' as Tab },
+        { icon: '▦', title: '주간 리포트',   sub: '시간별 성장 내용을 분석해요', tab: 'reports' as Tab },
       ].map((item) => (
         <button
           key={item.title}
