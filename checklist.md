@@ -12,13 +12,13 @@ PTBM 기반 유아 ADHD 행동 교정 웹앱 — **UI 프로토타입(화면만)
 - [x] 디렉터리 골격 생성 (`pages` `components` `features` `data` `types` `hooks` `utils`)
 
 ## 1. 타입 & 목업 데이터
-- [ ] `src/types/`에 `Quest` `Observation` `OptimizationResult` `QuestTrack` 정의
-- [ ] 아이(Child) 페르소나 목업 (연령·ADHD 유형·양육 환경 다양하게 몇 개)
-- [ ] 퀘스트 목업 — 3개 트랙(focus / behavior / parent_support) 각각 포함
-- [ ] 관찰(Observation) 기록 목업 (객관식 응답 예시)
-- [ ] AI 최적화 결과 목업 (nextQuest + rationale 텍스트)
-- [ ] 의사 리포트용 누적 데이터 목업 (주간 트렌드 등)
-- [ ] 하드코딩 값은 가급적 `src/data/`로 모음
+- [x] `src/types/`에 `Quest` `Observation` `OptimizationResult` `QuestTrack` 정의
+- [x] 아이(Child) 페르소나 목업 (연령·ADHD 유형·양육 환경 다양하게 몇 개)
+- [x] 퀘스트 목업 — 3개 트랙(focus / behavior / parent_support) 각각 포함
+- [x] 관찰(Observation) 기록 목업 (객관식 응답 예시)
+- [x] AI 최적화 결과 목업 (nextQuest + rationale 텍스트)
+- [x] 의사 리포트용 누적 데이터 목업 (주간 트렌드 등)
+- [x] 하드코딩 값은 가급적 `src/data/`로 모음
 
 ## 2. 공통 컴포넌트 & 레이아웃
 - [ ] 역할 전환 UI (부모 / 아이 / 의사 — 데모용 토글이나 메뉴)
