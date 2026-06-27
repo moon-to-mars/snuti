@@ -36,13 +36,13 @@ export function ClinicianReport() {
         <h1 style={{ fontFamily: 'Hanken Grotesk, sans-serif' }} className="text-[28px] font-extrabold text-[#1b1c1c] mt-0.5">
           {child.name}
         </h1>
-        <p className="text-[13px] text-[#817661] mt-0.5">평가 기간: 2023년 10월 1일 – 31일</p>
+        <p className="text-[13px] text-[#817661] mt-0.5">평가 기간: 2026년 6월 1일 – 30일</p>
         <div className="flex gap-2 mt-3">
           <button className="flex items-center gap-1.5 px-4 py-2 border border-[#d2c5ad] rounded-lg text-[13px] font-semibold text-[#1b1c1c] hover:bg-[#f5f3f3] transition-colors">
             ⬇ PDF 내보내기
           </button>
           <button className="flex items-center gap-1.5 px-4 py-2 bg-[#ffc83d] rounded-lg text-[13px] font-semibold text-[#715400] hover:bg-[#f5bf34] transition-colors">
-            ↗ 부모에게 공유
+            ↗ 의사에게 공유
           </button>
         </div>
       </div>
