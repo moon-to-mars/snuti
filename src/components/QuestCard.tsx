@@ -17,6 +17,14 @@ const TRACK_CONFIG = {
     dot: 'bg-[#d0a700]',
     border: 'border-[#d0a700]',
   },
+  emotion: {
+    label: '감정 조절',
+    bg: 'bg-[#fff3d7]',
+    offsetBg: 'bg-[#fae7b4]',
+    badge: 'bg-[#d0a700] text-[#231b00]',
+    dot: 'bg-[#d0a700]',
+    border: 'border-[#d0a700]',
+  },
   parent_support: {
     label: '부모 보조',
     bg: 'bg-[#fff0ea]',
